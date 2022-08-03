@@ -14,8 +14,20 @@ struct EditTodoView: View {
     var body: some View {
         VStack {
             Text("Title")
+                .padding()
+                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+                .cornerRadius(10)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             Text("Description")
+                .padding()
+                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+                .cornerRadius(10)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             Text("Deadline")
+                .padding()
+                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+                .cornerRadius(10)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             
             HStack{
                 Spacer()
@@ -51,11 +63,10 @@ struct EditTodoView: View {
                 }
                 Spacer()
             }
-            .frame(height: 55)
-            
-
-
+ 
+            Spacer()
         }
+        .navigationTitle("Edit Toto Item")
     }
 }
 

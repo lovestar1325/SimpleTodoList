@@ -16,4 +16,11 @@ struct TodoItem : Identifiable {
     let title: String
     let deadline: Date
     let status: TodoStatus
+    
+    init(id: String = UUID().uuidString, title: String, deadline: Date, status: TodoStatus) {
+        self.id = id
+        self.title = title
+        self.deadline = deadline
+        self.status = status
+    }
 }

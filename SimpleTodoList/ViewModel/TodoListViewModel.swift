@@ -20,6 +20,10 @@ class TodoListViewModel : ObservableObject {
         
     }
     
+    func addItem(todoItem: TodoItem) {
+        todoList.append(todoItem)
+    }
+    
     func deleteItem(indexSet: IndexSet) {
         todoList.remove(atOffsets: indexSet)
     }

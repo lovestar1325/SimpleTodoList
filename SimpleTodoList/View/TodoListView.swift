@@ -83,23 +83,31 @@ struct categoryesView: View {
             } label: {
                 Image(systemName: showCompleted ? "checkmark.square" : "square")
                 Text("Pending")
+                    .fontWeight(.semibold)
             }
-            HStack {
-                Button {
-                    showPending.toggle()
-                } label: {
-                    Image(systemName: showPending ? "checkmark.square" : "square")
-                    Text("Completed")
-                }
+            .foregroundColor(.red)
+            
+            
+            
+            Button {
+                showPending.toggle()
+            } label: {
+                Image(systemName: showPending ? "checkmark.square" : "square")
+                Text("Completed")
+                    .fontWeight(.semibold)
             }
-            HStack {
-                Button {
-                    showOverdue.toggle()
-                } label: {
-                    Image(systemName: showOverdue ? "checkmark.square" : "square")
-                    Text("Overdue")
-                }
+            .foregroundColor(.green)
+            
+            
+            Button {
+                showOverdue.toggle()
+            } label: {
+                Image(systemName: showOverdue ? "checkmark.square" : "square")
+                Text("Overdue")
+                    .fontWeight(.semibold)
             }
+            .foregroundColor(.blue)
+            
         }
     }
 }

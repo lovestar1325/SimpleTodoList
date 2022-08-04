@@ -12,8 +12,8 @@ class TodoListViewModel : ObservableObject {
     private var editIndex: Int?
     
     @Published var todoList: [TodoItem] = [
-        TodoItem(id: UUID().uuidString, title: "Job1", deadline: Date(), status: TodoStatus.Pending),
-        TodoItem(id: UUID().uuidString, title: "Job2", deadline: Date(), status: TodoStatus.Completed)
+        TodoItem(id: UUID().uuidString, title: "Job1", description: "", deadline: Date(), status: TodoStatus.Pending),
+        TodoItem(id: UUID().uuidString, title: "Job2", description: "", deadline: Date(), status: TodoStatus.Completed)
     ]
     
     func getItems() {
@@ -35,8 +35,16 @@ class TodoListViewModel : ObservableObject {
     func setEditIndex(todoItem: TodoItem) {
         editIndex = todoList.firstIndex(where: {todoItem.id == $0.id })
     }
+    
+    func getEditItem() -> TodoItem? {
+        if let index = editIndex {
+            return todoList[index]
+        } else {
+            return nil
+        }
+    }
     func editItem(todoItem: TodoItem) {
-        guard let index = editIndex else { return }
+//        guard let index = editIndex else { return }
         
 //        let index = todoList.firstIndex(where: {todoItem.id == $0.id })
         

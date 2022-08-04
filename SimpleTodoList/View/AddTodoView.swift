@@ -76,7 +76,7 @@ struct AddTodoView: View {
     }
     
     func addTodoItem() {
-        let todoItem = TodoItem(title: newTodoTitle, deadline: newTodoDeadline, status: .Pending)
+        let todoItem = TodoItem(title: newTodoTitle, description: newTodoDescription, deadline: newTodoDeadline, status: .Pending)
         todoVm.addItem(todoItem: todoItem)
     }
 }

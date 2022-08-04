@@ -9,25 +9,40 @@ import SwiftUI
 
 struct EditTodoView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var todoVm: TodoListViewModel
+    @State var newTitle: String = ""
+    @State var newDescription: String = ""
+    @State var newDeadline: Date = Date()
     
-//    @State var todoItem: TodoItem
+    init() {
+        if let todoItem = todoVm.getEditItem() {
+            newTitle = todoItem.title
+            newDescription = todoItem.description
+            newDeadline = todoItem.deadline
+        }
+        
+    }
+
     var body: some View {
+        
+        
+        
         VStack {
-            Text("Title")
+            TextField(newTitle, text: $newTitle)
                 .padding()
                 .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
                 .cornerRadius(10)
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            Text("Description")
+            TextField(newDescription, text: $newDescription)
                 .padding()
                 .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
                 .cornerRadius(10)
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            Text("Deadline")
-                .padding()
-                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
-                .cornerRadius(10)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+//            TextField(newData.rawValue.description,)
+//                .padding()
+//                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+//                .cornerRadius(10)
+//                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             
             HStack{
                 Spacer()
@@ -77,5 +92,6 @@ struct EditTodoView_Previews: PreviewProvider {
         NavigationView{
             EditTodoView()
         }
+        .environmentObject(vm)
      }
 }

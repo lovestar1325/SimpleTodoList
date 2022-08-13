@@ -14,30 +14,40 @@ struct EditTodoView: View {
     @State var newDescription: String = ""
     @State var newDeadline: Date = Date()
     
-    init() {
-        if let todoItem = todoVm.getEditItem() {
-            newTitle = todoItem.title
-            newDescription = todoItem.description
-            newDeadline = todoItem.deadline
-        }
-        
-    }
+    @State var todoItem: TodoItem
+    
+//    init() {
+//        if let todoItem = todoVm.getEditItem() {
+//            newTitle = todoItem.title
+//            newDescription = todoItem.description
+//            newDeadline = todoItem.deadline
+//        }
+//
+//    }
 
     var body: some View {
         
         
         
         VStack {
-            TextField(newTitle, text: $newTitle)
-                .padding()
-                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
-                .cornerRadius(10)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            TextField(newDescription, text: $newDescription)
-                .padding()
-                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
-                .cornerRadius(10)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            TextField(todoItem.title, text: $newTitle)
+            TextField(todoItem.description, text: $newDescription)
+        
+            
+            
+            
+//            TextField(newTitle, text: $newTitle)
+//                .padding()
+//                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+//                .cornerRadius(10)
+//                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+//            TextField(newDescription, text: $newDescription)
+//                .padding()
+//                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
+//                .cornerRadius(10)
+//                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+        
+        
 //            TextField(newData.rawValue.description,)
 //                .padding()
 //                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
@@ -81,16 +91,17 @@ struct EditTodoView: View {
  
             Spacer()
         }
-        .navigationTitle("Edit Toto Item")
+        .navigationTitle("Edit Todo Item")
     }
 }
 
 struct EditTodoView_Previews: PreviewProvider {
     static var vm:TodoListViewModel = TodoListViewModel()
+    static var item = TodoItem(title: "Test Job", description: "Description", deadline: Date(), status: .Overdue)
     
     static var previews: some View {
         NavigationView{
-            EditTodoView()
+            EditTodoView(todoItem: item)
         }
         .environmentObject(vm)
      }

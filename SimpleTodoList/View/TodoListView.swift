@@ -27,32 +27,33 @@ struct TodoListView: View {
                     if (todoItem.status == .Completed && showCompleted) ||
                         (todoItem.status == .Pending && showPending) ||
                         (todoItem.status == .Overdue && showOverdue) {
+                         
+                        NavigationLink{
+                            EditTodoView(todoItem: todoItem)
+                        } Label : {
+                            TodoItemRowView(todoItem: todoItem),
+                        }
                         
-                        TodoItemRowView(todoItem: todoItem)
-                            .onTapGesture {
-                                todoVm.setEditIndex(todoItem: todoItem)
-                                showEditView.toggle()
-                                
-                            }
+                        
                     }
                 }
                 .onDelete(perform: todoVm.deleteItem)
                 .onMove(perform: todoVm.moveItem)
-                .sheet(isPresented: $showEditView) {
-                    
-                } content: {
-                    EditTodoView()
-                }
+//                .sheet(isPresented: $showEditView) {
+//
+//                } content: {
+//                    EditTodoView()
+//                }
 
                 
             }
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing:
-                    NavigationLink("+", destination: {
-                        AddTodoView()
-                    })
-                )
+//            .navigationBarItems(
+//                leading: EditButton(),
+//                trailing:
+//                    NavigationLink("+", destination: {
+//                        AddTodoView()
+//                    })
+//                )
         }
         .navigationTitle("Todo List")
     }

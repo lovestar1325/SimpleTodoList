@@ -48,7 +48,8 @@ struct AddTodoView: View {
             
             HStack {
                 Button {
-                     addTodoItem()
+                    addTodoItem()
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Confirm")
                         .padding()

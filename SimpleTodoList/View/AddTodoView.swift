@@ -16,7 +16,7 @@ struct AddTodoView: View {
     
     var body: some View {
         VStack {
-            HStack {
+           HStack {
                 Text("Title : ").font(.title).padding(.horizontal)
                 Spacer()
             }
@@ -41,11 +41,31 @@ struct AddTodoView: View {
                 Text("Deadline").font(.title).padding(.horizontal)
                 Spacer()
             }
+        
+ /*
+ @State private var date = Date()
+ let dateRange: ClosedRange<Date> = {
+     let calendar = Calendar.current
+     let startComponents = DateComponents(year: 2021, month: 1, day: 1)
+     let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
+     return calendar.date(from:startComponents)!
+         ...
+         calendar.date(from:endComponents)!
+ }()
+
+ var body: some View {
+     DatePicker(
+         "Start Date",
+          selection: $date,
+          in: dateRange,
+          displayedComponents: [.date, .hourAndMinute]
+     )
+ }*/
             
-            DatePicker("", selection: $newTodoDeadline)
-                .datePickerStyle(.wheel)
-                .offset(x: -20, y: -40)
-            
+//            DatePicker("", selection: $newTodoDeadline)
+//                .datePickerStyle(.wheel)
+//                .offset(x: -20, y: -40)
+
             HStack {
                 Button {
                     addTodoItem()

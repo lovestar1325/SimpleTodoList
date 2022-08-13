@@ -10,22 +10,25 @@ import SwiftUI
 struct TodoItemRowView: View {
     var todoItem: TodoItem
     var body: some View {
-        HStack {
+        VStack {
             Text(todoItem.title)
+            HStack {
+                Text(todoItem.description)
+                Text(todoItem.deadline.description)
+            }
         }
-//        .frame(height: 55)
     }
 }
 
 struct TodoItemRowView_Previews: PreviewProvider {
-    static var todoVm:TodoListViewModel = TodoListViewModel()
-    
+    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .Overdue)
+   
     static var previews: some View {
         NavigationView {
-            TodoItemRowView(todoItem: todoVm.todoList[0])
+            TodoItemRowView(todoItem: item)
+//            TodoItemRowView()
             
         }
-        .environmentObject(todoVm)
         .previewLayout(.sizeThatFits)
         
     }

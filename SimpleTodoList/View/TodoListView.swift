@@ -21,39 +21,33 @@ struct TodoListView: View {
         VStack{
             categoryesView(showPending: $showPending, showCompleted: $showCompleted, showOverdue: $showOverdue)
             
-            
+
             List {
                 ForEach (todoVm.todoList) { todoItem in
                     if (todoItem.status == .Completed && showCompleted) ||
                         (todoItem.status == .Pending && showPending) ||
                         (todoItem.status == .Overdue && showOverdue) {
                          
-                        NavigationLink{
-                            EditTodoView(todoItem: todoItem)
-                        } Label : {
-                            TodoItemRowView(todoItem: todoItem),
-                        }
+                        
+                        TodoItemRowView(todoItem: todoItem)
+                            .onTapGesture(perform: EditTodoView)
+                        
+//                        NavigationLink{
+//                            EditTodoView(todoItem: todoItem)
+//                        } Label : {
+//                            TodoItemRowView(todoItem: todoItem),
+//                        }
                         
                         
                     }
                 }
                 .onDelete(perform: todoVm.deleteItem)
                 .onMove(perform: todoVm.moveItem)
-//                .sheet(isPresented: $showEditView) {
-//
-//                } content: {
-//                    EditTodoView()
-//                }
 
-                
             }
-//            .navigationBarItems(
-//                leading: EditButton(),
-//                trailing:
-//                    NavigationLink("+", destination: {
-//                        AddTodoView()
-//                    })
-//                )
+            .navigationBarItems(leading: EditButton())
+            
+
         }
         .navigationTitle("Todo List")
     }

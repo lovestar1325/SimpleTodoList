@@ -14,39 +14,25 @@ struct EditTodoView: View {
     @State var newDescription: String = ""
     @State var newDeadline: Date = Date()
     
-    @State var todoItem: TodoItem
+//    @State var todoItem: TodoItem
     
-//    init() {
-//        if let todoItem = todoVm.getEditItem() {
-//            newTitle = todoItem.title
-//            newDescription = todoItem.description
-//            newDeadline = todoItem.deadline
-//        }
-//
-//    }
-
     var body: some View {
         
         
         
         VStack {
-            TextField(todoItem.title, text: $newTitle)
-            TextField(todoItem.description, text: $newDescription)
-        
-            
-            
-            
-//            TextField(newTitle, text: $newTitle)
+//            TextField(todoItem.title, text: $newTitle)
 //                .padding()
 //                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
 //                .cornerRadius(10)
 //                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-//            TextField(newDescription, text: $newDescription)
+//
+//            TextField(todoItem.description, text: $newDescription)
 //                .padding()
 //                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
 //                .cornerRadius(10)
 //                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-        
+                        
         
 //            TextField(newData.rawValue.description,)
 //                .padding()
@@ -54,6 +40,8 @@ struct EditTodoView: View {
 //                .cornerRadius(10)
 //                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             
+            
+            Text("New Data....")
             HStack{
                 Spacer()
                 Button {
@@ -96,13 +84,13 @@ struct EditTodoView: View {
 }
 
 struct EditTodoView_Previews: PreviewProvider {
-    static var vm:TodoListViewModel = TodoListViewModel()
-    static var item = TodoItem(title: "Test Job", description: "Description", deadline: Date(), status: .Overdue)
+    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .Overdue)
     
     static var previews: some View {
         NavigationView{
-            EditTodoView(todoItem: item)
+//            EditTodoView(todoItem: item)
+            EditTodoView()
         }
-        .environmentObject(vm)
+//        .environmentObject(vm)
      }
 }

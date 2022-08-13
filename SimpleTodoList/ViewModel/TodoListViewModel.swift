@@ -11,13 +11,18 @@ import SwiftUI
 class TodoListViewModel : ObservableObject {
     private var editIndex: Int?
     
-    @Published var todoList: [TodoItem] = [
-        TodoItem(id: UUID().uuidString, title: "Job1", description: "", deadline: Date(), status: TodoStatus.Pending),
-        TodoItem(id: UUID().uuidString, title: "Job2", description: "", deadline: Date(), status: TodoStatus.Completed)
-    ]
+    @Published var todoList: [TodoItem] = []
+    
+    init() {
+        getItems()
+    }
     
     func getItems() {
-        
+        let item1 = TodoItem(title: "Job1", description: "Detail 1", deadline: Date(), status: .Pending)
+        let item2 = TodoItem(title: "Job2", description: "Detail 2", deadline: Date(), status: .Completed)
+        let item3 = TodoItem(title: "Job3", description: "Detail 3", deadline: Date(), status: .Overdue)
+    
+        todoList.append(contentsOf: [item1, item2, item3])
     }
     
     func addItem(todoItem: TodoItem) {

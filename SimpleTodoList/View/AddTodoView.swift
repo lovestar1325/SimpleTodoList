@@ -14,6 +14,7 @@ struct AddTodoView: View {
     @State var newTodoDescription: String = ""
     @State var newTodoDeadline: Date = Date()
     
+    
     var body: some View {
         VStack {
            HStack {
@@ -41,6 +42,14 @@ struct AddTodoView: View {
                 Text("Deadline").font(.title).padding(.horizontal)
                 Spacer()
             }
+//            HStack {
+//                Slider("date") {
+//                    
+//                }
+//                Slider("time") {
+//                    
+//                }
+//            }
         
  /*
  @State private var date = Date()

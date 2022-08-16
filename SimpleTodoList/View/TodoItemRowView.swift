@@ -7,16 +7,29 @@
 
 import SwiftUI
 
+
 struct TodoItemRowView: View {
     var todoItem: TodoItem
+    
     var body: some View {
-        VStack {
+        let dateString = getDateString()
+        
+        VStack (alignment: .leading) {
             Text(todoItem.title)
+                .font(.title)
             HStack {
                 Text(todoItem.description)
-                Text(todoItem.deadline.description)
+                    .font(.caption)
+                Spacer()
+                Text(dateString)
             }
         }
+    }
+    private func getDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: todoItem.deadline)
     }
 }
 

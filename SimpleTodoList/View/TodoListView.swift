@@ -15,6 +15,8 @@ struct TodoListView: View {
     @State private var showOverdue: Bool = true
     @State private var showEditView: Bool = false
     
+    @State private var showAddTodoView: Bool = false
+    
     
     var body: some View {
         
@@ -28,28 +30,23 @@ struct TodoListView: View {
                         (todoItem.status == .Pending && showPending) ||
                         (todoItem.status == .Overdue && showOverdue) {
                          
-                        
-                        TodoItemRowView(todoItem: todoItem)
-                            .onTapGesture(perform: EditTodoView)
-                        
-//                        NavigationLink{
-//                            EditTodoView(todoItem: todoItem)
-//                        } Label : {
-//                            TodoItemRowView(todoItem: todoItem),
-//                        }
-                        
-                        
+                        NavigationLink( destination: EditTodoView(todoItem: todoItem) ) {
+                            TodoItemRowView(todoItem: todoItem)
+                        }
                     }
                 }
                 .onDelete(perform: todoVm.deleteItem)
                 .onMove(perform: todoVm.moveItem)
 
             }
-            .navigationBarItems(leading: EditButton())
-            
-
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing:
+                    NavigationLink("+", destination: AddTodoView())
+            )
         }
         .navigationTitle("Todo List")
+        
     }
     
 }

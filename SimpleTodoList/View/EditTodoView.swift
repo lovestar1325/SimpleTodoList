@@ -18,10 +18,8 @@ struct EditTodoView: View {
     
     var body: some View {
         
-        
-        
         VStack {
-            TextField(todoItem.title, text: $newTitle)
+            TextField(newTitle, text: $newTitle)
                 .padding()
                 .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
                 .cornerRadius(10)
@@ -34,14 +32,13 @@ struct EditTodoView: View {
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                         
         
-//            TextField(newData.rawValue.description,)
-//                .padding()
-//                .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
-//                .cornerRadius(10)
-//                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-//            
             
-//            Text("New Data....")
+            DatePicker(selection: $newDeadline, displayedComponents: .date) {
+                Text("Todo until")
+            }
+            .padding()
+            
+            
             HStack{
                 Spacer()
                 Button {
@@ -81,6 +78,12 @@ struct EditTodoView: View {
         }
         .navigationTitle("Edit Todo Item")
     }
+    
+//    init() {
+//        newTitle = self.todoItem.title
+//        newDescription = self.todoItem.description
+//        newDeadline = self.todoItem.deadline
+//    }
 }
 
 struct EditTodoView_Previews: PreviewProvider {

@@ -13,6 +13,9 @@ struct AddTodoView: View {
     @State var newTodoTitle: String = ""
     @State var newTodoDescription: String = ""
     @State var newTodoDeadline: Date = Date()
+    @State var hasTargetDate: Bool = false
+    @State var hasTargetTime: Bool = false
+    @State var targetDate: Date = Date()
     
     
     var body: some View {
@@ -41,40 +44,19 @@ struct AddTodoView: View {
             HStack {
                 Text("Deadline").font(.title).padding(.horizontal)
                 Spacer()
+                Toggle(isOn: $hasTargetTime) {
+                    Text("Target Time?")
+                        .offset(x: 80)
+                }
+                Spacer()
             }
-//            HStack {
-//                Slider("date") {
-//                    
-//                }
-//                Slider("time") {
-//                    
-//                }
-//            }
-        
- /*
- @State private var date = Date()
- let dateRange: ClosedRange<Date> = {
-     let calendar = Calendar.current
-     let startComponents = DateComponents(year: 2021, month: 1, day: 1)
-     let endComponents = DateComponents(year: 2021, month: 12, day: 31, hour: 23, minute: 59, second: 59)
-     return calendar.date(from:startComponents)!
-         ...
-         calendar.date(from:endComponents)!
- }()
-
- var body: some View {
-     DatePicker(
-         "Start Date",
-          selection: $date,
-          in: dateRange,
-          displayedComponents: [.date, .hourAndMinute]
-     )
- }*/
             
-//            DatePicker("", selection: $newTodoDeadline)
-//                .datePickerStyle(.wheel)
-//                .offset(x: -20, y: -40)
-
+            DatePicker("TargetDate",
+                       selection: $targetDate,
+                       displayedComponents: hasTargetTime ? [.date, .hourAndMinute] : .date)
+               
+                .padding(.horizontal)
+        
             HStack {
                 Button {
                     addTodoItem()
@@ -99,6 +81,7 @@ struct AddTodoView: View {
                 }
         
             }
+            .offset(y: 50)
             Spacer()
         }
         .navigationTitle("New Todo Thing")

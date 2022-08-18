@@ -8,7 +8,7 @@
 import Foundation
 
 enum TodoStatus {
-    case Pending, Completed, Overdue
+    case pending, completed, overdue
 }
 
 struct TodoItem : Identifiable {
@@ -25,4 +25,5 @@ struct TodoItem : Identifiable {
         self.deadline = deadline
         self.status = status
     }
+    func updateStatus(
 }

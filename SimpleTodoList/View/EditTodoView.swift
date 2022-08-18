@@ -10,11 +10,12 @@ import SwiftUI
 struct EditTodoView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var todoVm: TodoListViewModel
+    @State var todoItem: TodoItem
+    
     @State var newTitle: String = ""
     @State var newDescription: String = ""
-    @State var newDeadline: Date = Date()
+    @State var targetDate: Date
     
-    @State var todoItem: TodoItem
     
     var body: some View {
         
@@ -33,7 +34,7 @@ struct EditTodoView: View {
                         
         
             
-            DatePicker(selection: $newDeadline, displayedComponents: .date) {
+            DatePicker(selection: $targetDate, displayedComponents: [.date, .hourAndMinute]) {
                 Text("Todo until")
             }
             .padding()
@@ -62,6 +63,7 @@ struct EditTodoView: View {
                         .cornerRadius(10)
                 }
                 Button {
+                    presentationMode.wrappedValue.dismiss()
                     
                 } label: {
                     Text("Complete")
@@ -78,20 +80,15 @@ struct EditTodoView: View {
         }
         .navigationTitle("Edit Todo Item")
     }
-    
-//    init() {
-//        newTitle = self.todoItem.title
-//        newDescription = self.todoItem.description
-//        newDeadline = self.todoItem.deadline
-//    }
+
 }
 
 struct EditTodoView_Previews: PreviewProvider {
-    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .Overdue)
+    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .overdue)
     
     static var previews: some View {
         NavigationView{
-            EditTodoView(todoItem: item)
+            EditTodoView(todoItem: item, targetDate: item.deadline)
 //            EditTodoView()
         }
 //        .environmentObject(vm)

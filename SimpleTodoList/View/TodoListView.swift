@@ -30,7 +30,7 @@ struct TodoListView: View {
                         (todoItem.status == .Pending && showPending) ||
                         (todoItem.status == .Overdue && showOverdue) {
                          
-                        NavigationLink( destination: EditTodoView(todoItem: todoItem) ) {
+                        NavigationLink( destination: EditTodoView(todoItem: todoItem, targetDate: todoItem.deadline) ) {
                             TodoItemRowView(todoItem: todoItem)
                         }
                     }

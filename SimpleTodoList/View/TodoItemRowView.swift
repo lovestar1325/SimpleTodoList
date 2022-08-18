@@ -34,7 +34,7 @@ struct TodoItemRowView: View {
 }
 
 struct TodoItemRowView_Previews: PreviewProvider {
-    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .Overdue)
+    static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .overdue)
    
     static var previews: some View {
         NavigationView {

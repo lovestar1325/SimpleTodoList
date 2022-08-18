@@ -18,9 +18,9 @@ class TodoListViewModel : ObservableObject {
     }
     
     func getItems() {
-        let item1 = TodoItem(title: "Job1", description: "Detail 1", deadline: Date(), status: .Pending)
-        let item2 = TodoItem(title: "Job2", description: "Detail 2", deadline: Date(), status: .Completed)
-        let item3 = TodoItem(title: "Job3", description: "Detail 3", deadline: Date(), status: .Overdue)
+        let item1 = TodoItem(title: "Job1", description: "Detail 1", deadline: Date(), status: .pending)
+        let item2 = TodoItem(title: "Job2", description: "Detail 2", deadline: Date(), status: .completed)
+        let item3 = TodoItem(title: "Job3", description: "Detail 3", deadline: Date(), status: .overdue)
     
         todoList.append(contentsOf: [item1, item2, item3])
     }
@@ -53,6 +53,10 @@ class TodoListViewModel : ObservableObject {
         
 //        let index = todoList.firstIndex(where: {todoItem.id == $0.id })
         
+    }
+    func updateStatus(todoItem: TodoItem) {
+        guard let index = todoList.first(where: {$0.id == todoItem.id}) else { return }
+        todoList[index].updateStatus(status: TodoStatus)
     }
     
 }

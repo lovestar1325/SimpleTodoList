@@ -8,7 +8,9 @@
 import Foundation
 
 enum TodoStatus {
-    case pending, completed, overdue
+    case pending
+    case completed
+    case overdue
 }
 
 struct TodoItem : Identifiable {
@@ -25,5 +27,10 @@ struct TodoItem : Identifiable {
         self.deadline = deadline
         self.status = status
     }
-    func updateStatus(
+    func completeStatus(todoItem: TodoItem) -> TodoItem {
+        return TodoItem(id: id, title: todoItem.title, description: todoItem.description, deadline: todoItem.deadline, status: .completed)
+    }
+    func updateItem(todoItem: TodoItem) -> TodoItem {
+        return TodoItem(id: id, title: todoItem.title, description: todoItem.description, deadline: todoItem.deadline, status: todoItem.status)
+    }
 }

@@ -20,6 +20,12 @@ struct TodoItemRowView: View {
             HStack {
                 Text(todoItem.description)
                     .font(.caption)
+                switch todoItem.status {
+                case .pending : Text("pending").font(.caption)
+                case .completed : Text("completed").font(.caption)
+                case .overdue : Text("Overdue").font(.caption)
+                    
+                }
                 Spacer()
                 Text(dateString)
             }

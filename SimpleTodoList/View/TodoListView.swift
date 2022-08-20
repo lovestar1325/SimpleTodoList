@@ -13,31 +13,23 @@ struct TodoListView: View {
     @State private var showPending: Bool = true
     @State private var showCompleted: Bool = true
     @State private var showOverdue: Bool = true
-    @State private var showEditView: Bool = false
-    
-    @State private var showAddTodoView: Bool = false
-    
-    
+        
     var body: some View {
         
         VStack{
             categoryesView(showPending: $showPending, showCompleted: $showCompleted, showOverdue: $showOverdue)
-            
 
             List {
                 ForEach (todoVm.todoList) { todoItem in
-                    if (todoItem.status == .Completed && showCompleted) ||
-                        (todoItem.status == .Pending && showPending) ||
-                        (todoItem.status == .Overdue && showOverdue) {
-                         
-                        NavigationLink( destination: EditTodoView(todoItem: todoItem, targetDate: todoItem.deadline) ) {
-                            TodoItemRowView(todoItem: todoItem)
+
+                    if checkShow(status: todoItem.status) {
+                            NavigationLink( destination: EditTodoView(todoItem: todoItem, targetDate: todoItem.deadline) ) {
+                                TodoItemRowView(todoItem: todoItem)
                         }
                     }
                 }
                 .onDelete(perform: todoVm.deleteItem)
                 .onMove(perform: todoVm.moveItem)
-
             }
             .navigationBarItems(
                 leading: EditButton(),
@@ -48,13 +40,23 @@ struct TodoListView: View {
         .navigationTitle("Todo List")
         
     }
-    
+    private func checkShow(status : TodoStatus) -> Bool {
+        switch status {
+        case .pending:
+            return showPending ? true : false
+        case .completed:
+            return showCompleted ? true : false
+        case .overdue:
+            return showOverdue ? true : false
+        }
+    }
+
 }
 
 
 struct TodoListView_Previews: PreviewProvider {
     static var vm:TodoListViewModel = TodoListViewModel()
-    
+
     static var previews: some View {
         NavigationView{
             TodoListView()
@@ -68,29 +70,26 @@ struct categoryesView: View {
     @Binding var showCompleted: Bool
     @Binding var showOverdue: Bool
     var body: some View {
-        
+
         HStack {
-            Button {
-                showCompleted.toggle()
-            } label: {
-                Image(systemName: showCompleted ? "checkmark.square" : "square")
-                Text("Pending")
-                    .fontWeight(.semibold)
-            }
-            .foregroundColor(.red)
-            
-            
-            
             Button {
                 showPending.toggle()
             } label: {
                 Image(systemName: showPending ? "checkmark.square" : "square")
-                Text("Completed")
+                Text("Pending")
                     .fontWeight(.semibold)
             }
             .foregroundColor(.green)
-            
-            
+
+            Button {
+                showCompleted.toggle()
+            } label: {
+                Image(systemName: showCompleted ? "checkmark.square" : "square")
+                Text("Completed")
+                    .fontWeight(.semibold)
+            }
+            .foregroundColor(.red)
+
             Button {
                 showOverdue.toggle()
             } label: {
@@ -99,7 +98,7 @@ struct categoryesView: View {
                     .fontWeight(.semibold)
             }
             .foregroundColor(.blue)
-            
+
         }
     }
 }

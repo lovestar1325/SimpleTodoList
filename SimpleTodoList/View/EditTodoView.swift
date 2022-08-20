@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct myButtonViewModifier: ViewModifier {
+    @State var color: Color = Color.blue
+    func body(content: Content) -> some View {
+        content
+            .frame(height: 55)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.white)
+            .background(color)
+            .cornerRadius(10)
+            
+    }
+}
+
+
 struct EditTodoView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var todoVm: TodoListViewModel
@@ -20,7 +34,7 @@ struct EditTodoView: View {
     var body: some View {
         
         VStack {
-            TextField(newTitle, text: $newTitle)
+            TextField(todoItem.title, text: $newTitle)
                 .padding()
                 .background(Color(#colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)))
                 .cornerRadius(10)
@@ -32,55 +46,51 @@ struct EditTodoView: View {
                 .cornerRadius(10)
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                         
-        
-            
-            DatePicker(selection: $targetDate, displayedComponents: [.date, .hourAndMinute]) {
-                Text("Todo until")
-            }
-            .padding()
+            DatePicker("todo until: ", selection: $targetDate, displayedComponents: [.date, .hourAndMinute])
+                .padding()
             
             
             HStack{
-                Spacer()
                 Button {
-                    
+                    todoVm.editItem(todoItem: makeNewItem())
+                    closeView()
                 } label: {
                     Text("Confirm")
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                        .modifier(myButtonViewModifier())
                 }
+                
+                Button("Cancel", action: closeView)
+                    .modifier(myButtonViewModifier(color: Color.red))
+
                 Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Cancel")
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(10)
-                }
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                    
+                    todoVm.completeStatus(todoItem: todoItem)
+                    closeView()
                 } label: {
                     Text("Complete")
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(Color.green)
-                        .cornerRadius(10)
+                        .modifier(myButtonViewModifier(color: Color.green))
                 }
-                Spacer()
             }
- 
+            .padding(.horizontal)
+            
             Spacer()
         }
         .navigationTitle("Edit Todo Item")
     }
+    
+    private func closeView() {
+        presentationMode.wrappedValue.dismiss()
+    }
 
+    private func setTargetDate() {
+        targetDate = todoItem.deadline
+    }
+    
+    private func makeNewItem() -> TodoItem {
+        let title = newTitle.isEmpty ? todoItem.title : newTitle
+        let description = newDescription.isEmpty ? todoItem.description : newDescription
+        
+        return TodoItem(id: todoItem.id, title: title, description: description, deadline: targetDate, status: todoItem.status)
+    }
 }
 
 struct EditTodoView_Previews: PreviewProvider {
@@ -89,8 +99,6 @@ struct EditTodoView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             EditTodoView(todoItem: item, targetDate: item.deadline)
-//            EditTodoView()
         }
-//        .environmentObject(vm)
-     }
+    }
 }

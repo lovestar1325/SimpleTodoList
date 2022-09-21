@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct TodoItemRowView: View {
-    var todoItem: TodoItem
+    let todoItem: TodoItem
     
     var body: some View {
         let dateString = getDateString()
@@ -43,11 +43,8 @@ struct TodoItemRowView_Previews: PreviewProvider {
     static var item = TodoItem(title: "Test Job", description: "This is something detail", deadline: Date(), status: .overdue)
    
     static var previews: some View {
-        NavigationView {
-            TodoItemRowView(todoItem: item)
-//            TodoItemRowView()
+        TodoItemRowView(todoItem: item)
             
-        }
         .previewLayout(.sizeThatFits)
         
     }

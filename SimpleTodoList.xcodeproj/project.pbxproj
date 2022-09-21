@@ -10,6 +10,7 @@
 		D60DAF6428909A2200519B3D /* SimpleTodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60DAF6328909A2200519B3D /* SimpleTodoListApp.swift */; };
 		D60DAF6828909A2700519B3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D60DAF6728909A2700519B3D /* Assets.xcassets */; };
 		D60DAF6B28909A2700519B3D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D60DAF6A28909A2700519B3D /* Preview Assets.xcassets */; };
+		D67F391C28DBC46500D96924 /* NoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F391B28DBC46500D96924 /* NoItemView.swift */; };
 		D68AE46128934810004636D7 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68AE46028934810004636D7 /* TodoItem.swift */; };
 		D68AE46328934BDC004636D7 /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68AE46228934BDC004636D7 /* AddTodoView.swift */; };
 		D68AE46528934BE7004636D7 /* EditTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68AE46428934BE7004636D7 /* EditTodoView.swift */; };
@@ -24,6 +25,7 @@
 		D60DAF6328909A2200519B3D /* SimpleTodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTodoListApp.swift; sourceTree = "<group>"; };
 		D60DAF6728909A2700519B3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D60DAF6A28909A2700519B3D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D67F391B28DBC46500D96924 /* NoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemView.swift; sourceTree = "<group>"; };
 		D68AE46028934810004636D7 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		D68AE46228934BDC004636D7 /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
 		D68AE46428934BE7004636D7 /* EditTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				D68AE46428934BE7004636D7 /* EditTodoView.swift */,
 				D68AE46828934C13004636D7 /* TodoListView.swift */,
 				D68AE48D2899A3D4004636D7 /* TodoItemRowView.swift */,
+				D67F391B28DBC46500D96924 /* NoItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				D68AE46128934810004636D7 /* TodoItem.swift in Sources */,
 				D68AE46928934C13004636D7 /* TodoListView.swift in Sources */,
+				D67F391C28DBC46500D96924 /* NoItemView.swift in Sources */,
 				D68AE46528934BE7004636D7 /* EditTodoView.swift in Sources */,
 				D68AE46328934BDC004636D7 /* AddTodoView.swift in Sources */,
 				D68AE48E2899A3D4004636D7 /* TodoItemRowView.swift in Sources */,

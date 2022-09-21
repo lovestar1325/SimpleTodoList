@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum TodoStatus {
+enum TodoStatus : Codable {
     case pending
     case completed
     case overdue
 }
 
-struct TodoItem : Identifiable {
+struct TodoItem : Identifiable, Codable {
     let id: String
     let title: String
     let description: String

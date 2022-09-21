@@ -15,28 +15,36 @@ struct TodoListView: View {
     @State private var showOverdue: Bool = true
         
     var body: some View {
-        
-        VStack{
-            categoryesView(showPending: $showPending, showCompleted: $showCompleted, showOverdue: $showOverdue)
+        ZStack{
+            if todoVm.todoList.isEmpty {
+                NoItemView()
+                    .transition(AnyTransition.opacity.animation(.easeIn))
+            } else {
+                VStack{
+                    categoryesView(showPending: $showPending, showCompleted: $showCompleted, showOverdue: $showOverdue)
 
-            List {
-                ForEach (todoVm.todoList) { todoItem in
+                    List {
+                        ForEach (todoVm.todoList) { todoItem in
 
-                    if checkShow(status: todoItem.status) {
-                            NavigationLink( destination: EditTodoView(todoItem: todoItem, targetDate: todoItem.deadline) ) {
-                                TodoItemRowView(todoItem: todoItem)
+                            if checkShow(status: todoItem.status) {
+                                    NavigationLink( destination: EditTodoView(todoItem: todoItem, targetDate: todoItem.deadline) ) {
+                                        TodoItemRowView(todoItem: todoItem)
+                                }
+                            }
                         }
+                        .onDelete(perform: todoVm.deleteItem)
+                        .onMove(perform: todoVm.moveItem)
                     }
+                    
                 }
-                .onDelete(perform: todoVm.deleteItem)
-                .onMove(perform: todoVm.moveItem)
             }
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing:
-                    NavigationLink("+", destination: AddTodoView())
-            )
+            
         }
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing:
+                NavigationLink("+", destination: AddTodoView())
+        )
         .navigationTitle("Todo List")
         
     }

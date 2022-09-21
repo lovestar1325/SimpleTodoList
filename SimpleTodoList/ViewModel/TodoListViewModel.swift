@@ -9,25 +9,27 @@ import Foundation
 import SwiftUI
 
 class TodoListViewModel : ObservableObject {
+    let todoListKey: String = "TodoListSaveKey"
     private var editIndex: Int?
     
-    @Published var todoList: [TodoItem] = []
+    @Published var todoList: [TodoItem] = [] {
+        didSet {
+            saveTodoList()
+        }
+    }
     
     init() {
         getItems()
     }
     
     func getItems() {
-        let targetDate = Date() + 3600 * 48
         
-        let item1 = TodoItem(title: "Job1", description: "Detail 1", deadline: Date(), status: .pending)
-        let item2 = TodoItem(title: "Job2", description: "Detail 2", deadline: Date(), status: .completed)
-        let item3 = TodoItem(title: "Job3", description: "Detail 3", deadline: Date(), status: .overdue)
-        let item4 = TodoItem(title: "Job4", description: "Detail 4", deadline: targetDate, status: .pending)
-        let item5 = TodoItem(title: "Job5", description: "Detail 5", deadline: Date(), status: .completed)
-        let item6 = TodoItem(title: "Job6", description: "Detail 6", deadline: targetDate, status: .overdue)
-    
-        todoList.append(contentsOf: [item1, item2, item3, item4, item5, item6])
+        guard
+            let data = UserDefaults.standard.data(forKey: todoListKey),
+            let savedData = try? JSONDecoder().decode([TodoItem].self, from: data)
+        else { return }
+        
+        todoList = savedData
     }
     
     func addItem(todoItem: TodoItem) {
@@ -69,6 +71,12 @@ class TodoListViewModel : ObservableObject {
         
         let newTodoItem = todoItem.completeStatus(todoItem: todoItem)
         todoList[index] = newTodoItem
+    }
+    
+    func saveTodoList() {
+        if let data = try? JSONEncoder().encode(todoList) {
+            UserDefaults.standard.set(data, forKey: todoListKey)
+        }
     }
     
 }

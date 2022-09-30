@@ -43,7 +43,7 @@ struct TodoListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing:
-                NavigationLink("+", destination: AddTodoView())
+                NavigationLink("Add +", destination: AddTodoView())
         )
         .navigationTitle("Todo List")
         

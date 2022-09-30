@@ -54,8 +54,12 @@ struct AddTodoView: View {
             DatePicker("TargetDate",
                        selection: $targetDate,
                        displayedComponents: hasTargetTime ? [.date, .hourAndMinute] : .date)
-               
                 .padding(.horizontal)
+                .onChange(of: targetDate) { newDate in
+                    if let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: newDate) {
+                        targetDate = hasTargetTime ? targetDate : midnight
+                    }
+                }
         
             HStack {
                 Button {
@@ -89,7 +93,9 @@ struct AddTodoView: View {
     }
     
     func addTodoItem() {
-        let todoItem = TodoItem(title: newTodoTitle, description: newTodoDescription, deadline: newTodoDeadline, status: .pending)
+        
+        let todoItem = TodoItem(title: newTodoTitle, description: newTodoDescription, deadline: targetDate, status: .pending)
+        
         todoVm.addItem(todoItem: todoItem)
     }
 }
